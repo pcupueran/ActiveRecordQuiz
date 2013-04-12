@@ -2,6 +2,7 @@ require "test/unit"
 require 'active_record'
 require 'shoulda'
 require 'database_cleaner'
+require 'pry'
 
 require_relative '../models/author'
 require_relative '../models/author_book'
