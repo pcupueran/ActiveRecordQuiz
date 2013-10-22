@@ -1,4 +1,4 @@
-require 'helper'
+require_relative './helper'
 
 class AboutActiveRecord < Test::Unit::TestCase
 
@@ -7,7 +7,7 @@ class AboutActiveRecord < Test::Unit::TestCase
       @library = Library.new(:name => "New York Public Library")
 
       # Add some books
-      @war_peace = Book.new(:title => "War & Peace", :isbn => "9780690011081", 
+      @war_peace = Book.new(:title => "War & Peace", :isbn => "9780690011081",
         :genre => "Historical fiction", :cover => Cover.new)
       # Obviously, there are more than this...
       10.times do |i|
@@ -23,7 +23,7 @@ class AboutActiveRecord < Test::Unit::TestCase
       end
       @boris = Author.new(:name => "Boris Pasternaks")
       @doctor_zhivago.author_books << AuthorBook.new(:author => @boris)
-      
+
       @life_fate = Book.new(:title => "Life and Fate", :isbn => "9780060913847",
         :genre => "Historical fiction", :cover => Cover.new)
       3.times do |i|
@@ -69,7 +69,7 @@ class AboutActiveRecord < Test::Unit::TestCase
         assert_equal ___, results.length
         assert_equal ___, results.first.class
         assert_equal ___, results
-      end     
+      end
 
       should "know how many books have at least 7 pages" do
         results = @library.books.includes(:pages).where('pages.number >= 7')
