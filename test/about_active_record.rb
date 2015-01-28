@@ -134,6 +134,7 @@ class AboutActiveRecord < MiniTest::Test
       end
 
       it "should be searchable by name" do
+        assert_equal ___, Book.find_by(:title => "War & Peace").class
         assert_equal ___, Book.where(:title => "War & Peace").class
         assert_equal ___, Book.where(:title => "War & Peace").to_sql.chomp.gsub("\"", "'").squeeze(" ")
       end
