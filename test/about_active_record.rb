@@ -68,14 +68,14 @@ class AboutActiveRecord < MiniTest::Test
         results = @library.books.where(:genre => "Historical fiction")
         assert_equal ___, results.length
         assert_equal ___, results.first.class
-        assert_equal ___, results
+        assert_equal ___, results.class
       end
 
       it "should know how many books have at least 7 pages" do
-        results = @library.books.includes(:pages).where('pages.number >= 7')
+        results = @library.books.joins(:pages).where('pages.number >= 7').uniq
         assert_equal ___, results.length
         assert_equal ___, results.first.class
-        assert_equal ___, results
+        assert_equal ___, results.class
       end
     end
 
