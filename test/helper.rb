@@ -1,6 +1,5 @@
-require "test/unit"
+require 'minitest/autorun'
 require 'active_record'
-require 'shoulda'
 require 'database_cleaner'
 require 'pry'
 
@@ -11,7 +10,7 @@ require_relative '../models/cover'
 require_relative '../models/library'
 require_relative '../models/page'
 
-class Test::Unit::TestCase
+class MiniTest::Test
   def setup
     ActiveRecord::Base.establish_connection(
       :adapter => 'sqlite3',

@@ -1,13 +1,13 @@
-require 'helper'
+require_relative 'helper'
 
-class AboutActiveRecord < Test::Unit::TestCase
+class AboutActiveRecord < MiniTest::Test
 
-  context "Given a Library and some books, " do
-    setup do
+  describe "Given a Library and some books, " do
+    before do
       @library = Library.new(:name => "New York Public Library")
 
       # Add some books
-      @war_peace = Book.new(:title => "War & Peace", :isbn => "9780690011081", 
+      @war_peace = Book.new(:title => "War & Peace", :isbn => "9780690011081",
         :genre => "Historical fiction", :cover => Cover.new)
       # Obviously, there are more than this...
       10.times do |i|
@@ -23,7 +23,7 @@ class AboutActiveRecord < Test::Unit::TestCase
       end
       @boris = Author.new(:name => "Boris Pasternaks")
       @doctor_zhivago.author_books << AuthorBook.new(:author => @boris)
-      
+
       @life_fate = Book.new(:title => "Life and Fate", :isbn => "9780060913847",
         :genre => "Historical fiction", :cover => Cover.new)
       3.times do |i|
@@ -43,8 +43,8 @@ class AboutActiveRecord < Test::Unit::TestCase
       @leo.reload
     end
 
-    context "in total" do
-      should "have the right number of models" do
+    describe "in total" do
+      it "should have the right number of models" do
         assert_equal ___, Library.count
         assert_equal ___, Book.count
         assert_equal ___, Page.count
@@ -54,8 +54,8 @@ class AboutActiveRecord < Test::Unit::TestCase
       end
     end
 
-    context "the library" do
-      should "have many books" do
+    describe "the library" do
+      it "should have many books" do
         assert_equal ___, @library.respond_to?(:books)
         assert_equal ___, @library.books.length
         assert_equal ___, @library.books.first.class
@@ -64,14 +64,14 @@ class AboutActiveRecord < Test::Unit::TestCase
         assert_equal ___, @library.books.first.library
       end
 
-      should "know how many books are Historical fiction" do
+      it "should know how many books are Historical fiction" do
         results = @library.books.where(:genre => "Historical fiction")
         assert_equal ___, results.length
         assert_equal ___, results.first.class
         assert_equal ___, results
-      end     
+      end
 
-      should "know how many books have at least 7 pages" do
+      it "should know how many books have at least 7 pages" do
         results = @library.books.includes(:pages).where('pages.number >= 7')
         assert_equal ___, results.length
         assert_equal ___, results.first.class
@@ -79,14 +79,14 @@ class AboutActiveRecord < Test::Unit::TestCase
       end
     end
 
-    context "Leo Tolstoy" do
-      should "have written many pages" do
+    describe "Leo Tolstoy" do
+      it "should have written many pages" do
         assert_equal ___, @leo.respond_to?(:pages)
         assert_equal ___, @leo.pages.length
         assert_equal ___, @leo.pages.first.class
       end
 
-      should "be searchable by name" do
+      it "should be searchable by name" do
         assert_equal ___, Author.find_by_name("Leo Tolstoy").class
         assert_equal ___, Author.find_by_name("Leo Tolstoy")
         assert_equal ___, Author.where(:name => "Leo Tolstoy").class
@@ -95,8 +95,8 @@ class AboutActiveRecord < Test::Unit::TestCase
       end
     end
 
-    context "War and Peace" do
-      should "have one cover" do
+    describe "War and Peace" do
+      it "should have one cover" do
         assert_equal ___, @war_peace.respond_to?(:covers)
         assert_equal ___, @war_peace.respond_to?(:cover)
         assert_equal ___, @war_peace.cover.class
@@ -107,7 +107,7 @@ class AboutActiveRecord < Test::Unit::TestCase
         assert_equal ___, @war_peace.cover.respond_to?(:cover_id)
       end
 
-      should "have many pages" do
+      it "should have many pages" do
         assert_equal ___, @war_peace.respond_to?(:pages)
         assert_equal ___, @war_peace.pages.length
         assert_equal ___, @war_peace.pages.first.class
@@ -118,7 +118,7 @@ class AboutActiveRecord < Test::Unit::TestCase
         assert_equal ___, @war_peace.pages.first.respond_to?(:page_id)
       end
 
-      should "have many authors" do
+      it "should have many authors" do
         assert_equal ___, @war_peace.respond_to?(:authors)
         assert_equal ___, @war_peace.respond_to?(:author_books)
         assert_equal ___, @war_peace.authors.class
@@ -133,7 +133,7 @@ class AboutActiveRecord < Test::Unit::TestCase
         assert_equal ___, @war_peace.authors.to_sql.chomp.gsub("\"", "'").squeeze(" ")
       end
 
-      should "be searchable by name" do
+      it "should be searchable by name" do
         assert_equal ___, Book.where(:title => "War & Peace").class
         assert_equal ___, Book.where(:title => "War & Peace").to_sql.chomp.gsub("\"", "'").squeeze(" ")
       end
