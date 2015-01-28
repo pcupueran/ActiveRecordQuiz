@@ -7,4 +7,4 @@ A little example that tests your knowledge of ActiveRecord basics.
     bundle
 
 
-    bundle exec ruby -Ilib:test test/about_active_record.rb
+    bundle exec ruby test/about_active_record.rb
